@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indibiz - Internet Bisnis Profesional untuk UKM #NaikKelas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+    <style>
+        /* --- CSS Reset & Basic Styling --- */
+        :root {
+            --primary-color: #E60012;
+            --secondary-color: #003366;
+            --whatsapp-green: #25D366;
+            --whatsapp-green-dark: #1DA851;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+            --white-color: #ffffff;
+            --grey-text: #555;
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+            --best-value-yellow: #ffc107;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.7; color: var(--grey-text); background-color: var(--white-color); }
+        .container { max-width: 1100px; margin: auto; overflow: hidden; padding: 0 20px; }
+        section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 20px; color: var(--secondary-color); font-weight: 700; }
+        .section-subtitle { text-align: center; max-width: 600px; margin: 0 auto 50px auto; font-size: 1.1rem; }
+
+        /* --- Header & Hamburger Menu Styling --- */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .main-header { background: var(--secondary-color); padding: 1rem 0; position: sticky; /* Diubah jadi sticky agar tidak transparan */ top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .main-header .logo { font-size: 1.8rem; font-weight: 700; color: var(--white-color); text-decoration: none; animation: fadeInDown 0.8s ease-out; }
+        .main-nav { display: flex; }
+        .main-nav a { margin: 0 15px; text-decoration: none; color: var(--white-color); font-weight: 600; }
+        .hamburger-menu { display: none; cursor: pointer; color: var(--white-color); font-size: 1.8rem; z-index: 1002; }
+        .dropdown-menu { display: none; flex-direction: column; position: absolute; top: 60px; right: 20px; background-color: var(--white-color); border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); z-index: 1001; width: 200px; overflow: hidden; }
+        .dropdown-menu.open { display: flex; }
+        .dropdown-menu a { display: block; padding: 15px 20px; color: var(--dark-color); text-decoration: none; font-weight: 600; transition: background-color 0.3s; }
+        .dropdown-menu a:hover { background-color: #f0f0f0; }
+        
+        /* --- CSS BARU: HERO SECTION DENGAN SPLIT LAYOUT --- */
+        #hero-new {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #004b8d 100%);
+            padding: 100px 0 60px 0;
+            color: var(--white-color);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .hero-btn {
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 18px 35px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 15px rgba(230, 0, 18, 0.4);
+            display: inline-block;
+        }
+        .hero-btn:hover { background: #c00010; transform: translateY(-3px); }
+        .hero-slider-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .hero-slider-item img {
+            width: 100%;
+            height: 450px; /* Tinggi gambar dibuat tetap */
+            object-fit: cover;
+        }
+        .hero-slider .slick-dots {
+            bottom: 15px;
+        }
+        .hero-slider .slick-dots li button:before {
+            font-size: 12px;
+            color: var(--white-color);
+            opacity: 0.6;
+        }
+        .hero-slider .slick-dots li.slick-active button:before {
+            opacity: 1;
+        }
+        /* --- END OF HERO CSS --- */
+        
+        /* --- General Section Styling (Tidak berubah) --- */
+        .why-indibiz, #testimonials, #faq { background-color: var(--light-color); }
+        .why-indibiz-grid, .testimonial-grid, .pricing-grid, .services-grid, .ps-grid, .footer-grid { display: grid; gap: 30px; }
+        .why-indibiz-grid, .testimonial-grid, .pricing-grid, .services-grid { grid-template-columns: repeat(3, 1fr); }
+        .ps-grid { grid-template-columns: 1fr 1fr; }
+        .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        .why-indibiz-card { padding: 35px; background-color: var(--white-color); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+        .why-indibiz-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .why-indibiz-card i { font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; }
+        .why-indibiz-card h4 { font-size: 1.4rem; margin-bottom: 15px; color: var(--secondary-color); }
+        .problem-col, .solution-col { padding: 30px; border-radius: 8px; }
+        .problem-col { background-color: #fff6f6; border: 2px solid #ffe0e0; }
+        .solution-col { background-color: #f6fff8; border: 2px solid #e0ffe8; }
+        .ps-grid h4 { font-size: 1.5rem; margin-bottom: 20px; text-align: center; }
+        .problem-col h4 { color: var(--danger-red); }
+        .solution-col h4 { color: var(--success-green); }
+        .ps-grid ul { list-style: none; }
+        .ps-grid ul li { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 1.05rem; }
+        .ps-grid ul li i { font-size: 1.2rem; margin-right: 15px; margin-top: 5px; }
+        .problem-col ul li i { color: var(--danger-red); }
+        .solution-col ul li i { color: var(--success-green); }
+        #pricing { background-color: var(--white-color); }
+        .pricing-card { border: 2px solid #e9ecef; border-radius: 12px; text-align: center; padding: 30px; transition: all 0.3s ease; display: flex; flex-direction: column; }
+        .pricing-card:hover, .pricing-card.best-value { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-color: var(--primary-color); }
+        .pricing-card.best-value { position: relative; overflow: hidden; }
+        .best-value-ribbon { position: absolute; top: -10px; right: -10px; background: var(--best-value-yellow); color: var(--dark-color); padding: 8px; font-size: 0.8rem; font-weight: 700; width: 120px; transform: rotate(45deg); top: 20px; right: -30px; }
+        .pricing-speed { font-size: 3.5rem; font-weight: 700; color: var(--secondary-color); line-height: 1; }
+        .pricing-speed span { font-size: 1.2rem; font-weight: 400; }
+        .pricing-old-price { margin: 15px 0 5px 0; color: var(--grey-text); }
+        .pricing-old-price del { opacity: 0.7; }
+        .pricing-new-price { font-size: 2.8rem; font-weight: 700; color: var(--primary-color); line-height: 1; }
+        .pricing-new-price sup { font-size: 1.5rem; top: -1em; }
+        .pricing-new-price span { font-size: 1rem; color: var(--grey-text); font-weight: 400; }
+        .btn-pilih-paket { background: var(--secondary-color); color: var(--white-color); padding: 12px 20px; text-decoration: none; border-radius: 8px; font-weight: 600; display: block; margin-top: 25px; transition: background-color 0.3s; }
+        .btn-pilih-paket:hover { background: #001a33; }
+        .pricing-card.best-value .btn-pilih-paket { background: var(--primary-color); }
+        .pricing-card.best-value .btn-pilih-paket:hover { background: #c00010; }
+        .terms-conditions { margin-top: 50px; text-align: center; background: var(--light-color); padding: 20px; border-radius: 8px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .terms-conditions h4 { color: var(--secondary-color); margin-bottom: 10px; }
+        .terms-conditions ul { list-style: none; padding: 0; }
+        #testimonials { background-color: var(--light-color); }
+        .testimonial-card { background: var(--white-color); padding: 25px; border-radius: 8px; border-left: 5px solid var(--primary-color); box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .testimonial-card blockquote { font-style: italic; margin-bottom: 15px; flex-grow: 1; }
+        .testimonial-card cite { font-weight: 700; font-style: normal; color: var(--secondary-color); }
+        #faq { background-color: var(--white-color); }
+        .faq-accordion { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid #e0e0e0; }
+        .faq-question { background: none; border: none; width: 100%; text-align: left; padding: 20px 0; font-size: 1.2rem; font-weight: 600; color: var(--secondary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question i { transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; }
+        .faq-answer p { padding: 0 0 20px 0; }
+        .faq-item.active .faq-question i { transform: rotate(45deg); }
+        .faq-item.active .faq-answer { max-height: 200px; }
+        .main-footer { background-color: var(--dark-color); color: var(--light-color); padding: 60px 0 20px 0; }
+        .footer-col a { color: var(--white-color); text-decoration: none; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--primary-color); }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid #444; }
+        .designer-credit { margin-top: 10px; font-size: 0.8rem; color: #aaa; }
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: var(--white-color); padding: 12px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1001; cursor: pointer; text-decoration: none; transition: all 0.3s ease; }
+        .wa-float i { font-size: 1.8rem; }
+        .wa-float:hover { transform: scale(1.05); background-color: var(--whatsapp-green-dark); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; display: none; justify-content: center; align-items: center; }
+        .modal-content { background: var(--white-color); padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; position: relative; }
+        .modal-close { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+        .modal-content h3 { margin-bottom: 20px; text-align: center; color: var(--secondary-color); font-size: 1.5rem; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; }
+        .form-submit-btn { width: 100%; background: var(--primary-color); color: var(--white-color); padding: 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 600; margin-top: 10px; transition: background 0.3s; }
+        .form-submit-btn:hover { background: #c00010; }
+
+        @media (max-width: 992px) {
+            .testimonial-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+            /* --- CSS BARU: MOBILE LAYOUT UNTUK HERO --- */
+            .hero-grid { grid-template-columns: 1fr; }
+            #hero-new { padding: 80px 0 60px 0; height: auto; text-align: center; }
+            .hero-slider-container { margin-bottom: 40px; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text p { font-size: 1.1rem; }
+        }
+        @media (max-width: 768px) {
+            .section-title { font-size: 1.8rem; }
+            .why-indibiz-grid, .footer-grid, .ps-grid, .testimonial-grid, .pricing-grid, .services-grid { grid-template-columns: 1fr; }
+            .main-nav { display: none; }
+            .hamburger-menu { display: block; }
+            .wa-float { font-size: 1rem; padding: 12px 20px; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <a href="#" class="logo">Indibiz</a>
+            <nav class="main-nav">
+                <a href="#problem-solution">Solusi Bisnis</a>
+                <a href="#pricing">Paket Harga</a>
+                <a href="#testimonials">Testimoni</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <div class="hamburger-menu"><i class="fas fa-bars"></i></div>
+        </div>
+        <nav class="dropdown-menu">
+            <a href="#problem-solution">Solusi Bisnis</a>
+            <a href="#pricing">Paket Harga</a>
+            <a href="#testimonials">Testimoni</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-new">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <h1>Bisnis Sering 'Buffer'? Saatnya NAIK KELAS.</h1>
+                        <p>Lupakan koneksi yang putus-nyambung di jam sibuk. Berikan pelanggan Anda pengalaman digital terbaik dengan internet bisnis sebenarnya.</p>
+                        <a href="#" class="hero-btn" id="heroCtaButton">Cek Paket Bisnis Saya</a>
+                    </div>
+                    <div class="hero-slider-container">
+                        <div class="hero-slider">
+                            <div class="hero-slider-item">
+                                <img src="hero-1.jpg" alt="Kafe modern yang ramai dengan koneksi Indibiz">
+                            </div>
+                            <div class="hero-slider-item">
+                                <img src="hero-2.jpg" alt="Bisnis fashion online yang mengandalkan internet Indibiz">
+                            </div>
+                            <div class="hero-slider-item">
+                                <img src="hero-3.jpg" alt="Kantor atau co-working space dengan WiFi cepat dari Indibiz">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="why-indibiz" class="why-indibiz">
+            <div class="container">
+                <h2 class="section-title">Fondasi Digital yang Membuat Anda Unggul</h2>
+                <p class="section-subtitle">Di Indibiz, kami percaya internet untuk bisnis bukan sekadar soal kecepatan, tapi soal stabilitas, keandalan, dan dukungan yang membuat Anda tenang.</p>
+                <div class="why-indibiz-grid">
+                    <div class="why-indibiz-card"><i class="fas fa-rocket"></i><h4>Jaringan Fiber Optik Murni</h4><p>Nikmati kecepatan maksimal dan latensi rendah dengan infrastruktur 100% fiber optik, bukan kabel tembaga.</p></div>
+                    <div class="why-indibiz-card"><i class="fas fa-shield-alt"></i><h4>Jaminan Stabilitas & Keamanan</h4><p>Dengan jaminan layanan (SLA) 99.5%, bisnis Anda online terus. Lindungi data transaksi dengan sistem keamanan kami.</p></div>
+                    <div class="why-indibiz-card"><i class="fas fa-headset"></i><h4>Dukungan Teknis Prioritas</h4><p>Gangguan internet berarti rugi. Dapatkan layanan prioritas dengan tim teknis khusus bisnis yang siap membantu 24/7.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="problem-solution">
+            <div class="container">
+                <h2 class="section-title">Apakah Ini Terjadi Pada Bisnis Anda?</h2>
+                <p class="section-subtitle">Banyak pemilik usaha tidak sadar bahwa masalah operasional sehari-hari seringkali berakar dari kualitas koneksi internet yang tidak memadai.</p>
+                <div class="ps-grid">
+                    <div class="problem-col">
+                        <h4>MASALAH UMUM</h4>
+                        <ul>
+                            <li><i class="fas fa-times-circle"></i> Pembayaran QRIS/EDC gagal saat kafe sedang ramai.</li>
+                            <li><i class="fas fa-times-circle"></i> Upload video promosi ke Instagram atau TikTok butuh waktu berjam-jam.</li>
+                            <li><i class="fas fa-times-circle"></i> Pelanggan komplain karena WiFi tamu lemot dan sering putus.</li>
+                            <li><i class="fas fa-times-circle"></i> CCTV sering offline, tidak bisa memantau keamanan toko dari jauh.</li>
+                            <li><i class="fas fa-times-circle"></i> Sinkronisasi stok antar cabang atau ke marketplace lambat dan tidak akurat.</li>
+                        </ul>
+                    </div>
+                    <div class="solution-col">
+                        <h4>SOLUSI INDIBIZ</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Transaksi lancar jaya dengan koneksi stabil bahkan di jam sibuk.</li>
+                            <li><i class="fas fa-check-circle"></i> Upload konten HD dalam hitungan menit berkat kecepatan upload simetris.</li>
+                            <li><i class="fas fa-check-circle"></i> Sediakan WiFi tamu yang kencang dan andal, tingkatkan kepuasan pelanggan.</li>
+                            <li><i class="fas fa-check-circle"></i> Pantau semua aset bisnis Anda 24/7 dengan koneksi yang selalu online.</li>
+                            <li><i class="fas fa-check-circle"></i> Update data inventaris dan penjualan secara instan tanpa penundaan.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="why-indibiz">
+            <div class="container">
+                <h2 class="section-title">Pilihan Paket Harga Terbaik untuk Bisnis Anda</h2>
+                <p class="section-subtitle">Investasi terbaik untuk kelancaran operasional dan kepuasan pelanggan. Pilih paket yang paling sesuai dengan kebutuhan bisnis Anda saat ini.</p>
+                <div class="pricing-grid">
+                    <div class="pricing-card"><div class="pricing-speed">50 <span>Mbps</span></div><div class="pricing-old-price">Harga Mulai <del>Rp 397.000</del></div><div class="pricing-new-price"><sup>Rp</sup> 360.000 <span>/bulan</span></div><a href="#" class="btn-pilih-paket">Pilih Paket Ini</a></div>
+                    <div class="pricing-card"><div class="pricing-speed">75 <span>Mbps</span></div><div class="pricing-old-price">Harga Mulai <del>Rp 447.000</del></div><div class="pricing-new-price"><sup>Rp</sup> 412.500 <span>/bulan</span></div><a href="#" class="btn-pilih-paket">Pilih Paket Ini</a></div>
+                    <div class="pricing-card best-value"><div class="best-value-ribbon">Paling Laris</div><div class="pricing-speed">100 <span>Mbps</span></div><div class="pricing-old-price">Harga Mulai <del>Rp 557.000</del></div><div class="pricing-new-price"><sup>Rp</sup> 500.000 <span>/bulan</span></div><a href="#" class="btn-pilih-paket">Pilih Paket Ini</a></div>
+                    <div class="pricing-card"><div class="pricing-speed">150 <span>Mbps</span></div><div class="pricing-old-price">Harga Mulai <del>Rp 697.000</del></div><div class="pricing-new-price"><sup>Rp</sup> 615.000 <span>/bulan</span></div><a href="#" class="btn-pilih-paket">Pilih Paket Ini</a></div>
+                    <div class="pricing-card"><div class="pricing-speed">200 <span>Mbps</span></div><div class="pricing-old-price">Harga Mulai <del>Rp 877.000</del></div><div class="pricing-new-price"><sup>Rp</sup> 750.000 <span>/bulan</span></div><a href="#" class="btn-pilih-paket">Pilih Paket Ini</a></div>
+                    <div class="pricing-card"><div class="pricing-speed">300 <span>Mbps</span></div><div class="pricing-old-price">Harga Mulai <del>Rp 1.257.000</del></div><div class="pricing-new-price"><sup>Rp</sup> 1.020.000 <span>/bulan</span></div><a href="#" class="btn-pilih-paket">Pilih Paket Ini</a></div>
+                </div>
+                <div class="terms-conditions">
+                    <h4>Syarat dan Ketentuan Berlangganan:</h4>
+                    <ul>
+                        <li>1. Biaya pasang baru (PSB) Rp150.000 dan dibayarkan di awal saat instalasi pemasangan di lokasi Anda.</li>
+                        <li>2. Harga belum termasuk PPN 11%.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" >
+            <div class="container">
+                <h2 class="section-title">Dipercaya oleh Ratusan Pebisnis di Seluruh Indonesia</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card"><blockquote>"Sebagai pemilik restoran, kestabilan internet untuk order online dan pembayaran non-tunai sangat krusial. Indibiz tidak pernah mengecewakan!"</blockquote><cite>- Arya Pratama, Resto Padang Jaya</cite></div>
+                    <div class="testimonial-card"><blockquote>"Dulu toko online saya sering down saat ada flash sale. Setelah pakai Indibiz, website stabil, pelanggan happy, penjualan pun meningkat pesat."</blockquote><cite>- Siska Dewi, Owner Hijab Modern</cite></div>
+                    <div class="testimonial-card"><blockquote>"Untuk kursus online saya, kualitas video sangat penting. Koneksi dari Indibiz sangat mendukung kelancaran proses belajar mengajar."</blockquote><cite>- Kevin Wijaya, Founder EnglishPro</cite></div>
+                    <div class="testimonial-card"><blockquote>"Kami adalah agensi kreatif, kirim file desain ukuran besar setiap hari. Kecepatan upload simetris Indibiz benar-benar penyelamat produktivitas tim."</blockquote><cite>- Citra Lestari, Creative Director</cite></div>
+                    <div class="testimonial-card"><blockquote>"Mengelola co-working space butuh WiFi yang bisa diandalkan banyak orang sekaligus. Pindah ke Indibiz adalah keputusan terbaik, tidak ada lagi keluhan."</blockquote><cite>- Johan Salim, Manager Co-Work Hub</cite></div>
+                    <div class="testimonial-card"><blockquote>"Sistem kasir kami sekarang full online dan terhubung ke semua cabang. Sinkronisasi data stok jadi instan berkat Indibiz. Sangat membantu!"</blockquote><cite>- Mariana, Owner Roti Enak Bakery</cite></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq" class="why-indibiz">
+            <div class="container">
+                <h2 class="section-title">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+                <div class="faq-accordion">
+                    <div class="faq-item"><button class="faq-question"> Apa bedanya internet Indibiz dengan internet rumahan biasa? <i class="fas fa-plus"></i></button><div class="faq-answer"><p>Internet Indibiz dirancang khusus untuk kebutuhan bisnis dengan prioritas jaringan yang lebih tinggi, kecepatan upload dan download simetris, serta jaminan tingkat layanan (SLA) dan dukungan teknis 24/7 yang tidak ada di paket rumahan.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"> Berapa lama proses pemasangan setelah pendaftaran? <i class="fas fa-plus"></i></button><div class="faq-answer"><p>Proses pemasangan umumnya memakan waktu 3-5 hari kerja setelah survei lokasi dan konfirmasi pendaftaran, tergantung pada kondisi jaringan di area Anda.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"> Apakah ada jaminan kecepatan atau SLA (Service Level Agreement)? <i class="fas fa-plus"></i></button><div class="faq-answer"><p>Ya, kami memberikan jaminan layanan atau SLA sebesar 99.5%. Artinya, kami menjamin koneksi Anda akan aktif 99.5% dalam sebulan. Jika terjadi gangguan melebihi batas tersebut, Anda berhak mendapatkan kompensasi.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"> Bagaimana jika terjadi gangguan di luar jam kerja? <i class="fas fa-plus"></i></button><div class="faq-answer"><p>Tim dukungan teknis khusus bisnis kami siap melayani Anda 24 jam sehari, 7 hari seminggu, termasuk hari libur. Anda bisa menghubungi kami kapan saja jika terjadi kendala.</p></div></div>
+                    <div class="faq-item"><button class="faq-question"> Apakah saya bisa upgrade paket jika bisnis saya berkembang? <i class="fas fa-plus"></i></button><div class="faq-answer"><p>Tentu saja. Kami menyediakan paket yang fleksibel. Anda dapat dengan mudah meningkatkan kecepatan (upgrade) paket internet Anda kapan saja sesuai dengan pertumbuhan kebutuhan bisnis Anda.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col"><h4>Indibiz</h4><p>Penyedia internet bisnis andal yang menjadi fondasi bagi UMKM Indonesia untuk #NaikKelas.</p></div>
+                <div class="footer-col"><h4>Tautan Cepat</h4><ul><li><a href="#why-indibiz">Keunggulan</a></li><li><a href="#pricing">Paket Harga</a></li><li><a href="#testimonials">Testimoni</a></li></ul></div>
+                <div class="footer-col"><h4>Dukungan</h4><ul><li><a href="#faq">FAQ</a></li><li><a href="#">Hubungi Kami</a></li><li><a href="#">Syarat & Ketentuan</a></li></ul></div>
+                <div class="footer-col"><h4>Ikuti Kami</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Indibiz by Telkom Indonesia. All Rights Reserved.</p>
+                <p class="designer-credit">Web Designer: Donny-Purwokerto</p>
+            </div>
+        </div>
+    </footer>
+    
+    <a id="waFloatButton" class="wa-float" title="Konsultasi Gratis">
+        <i class="fab fa-whatsapp"></i>
+        <span>Konsultasi Gratis</span>
+    </a>
+    
+    <div class="modal-overlay" id="consultationModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalCloseButton">&times;</span>
+            <h3>Dapatkan Info Pemasangan di Lokasi Anda</h3>
+            <form id="consultationForm">
+                <div class="form-group"><label for="nama">Nama Lengkap Anda</label><input type="text" id="nama" name="nama" required></div>
+                <div class="form-group"><label for="alamat">Alamat Lengkap Usaha</label><input type="text" id="alamat" name="alamat" required></div>
+                <div class="form-group"><label for="nohp">Nomor HP (WhatsApp)</label><input type="tel" id="nohp" name="nohp" placeholder="Contoh: 08123456789" required></div>
+                <button type="submit" class="form-submit-btn">Cek Paket & Harga Terbaik</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            // --- Logic untuk Hero Slider ---
+            $('.hero-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 1000,
+                fade: true,
+                cssEase: 'linear',
+                autoplay: true,
+                autoplaySpeed: 4000,
+                arrows: false
+            });
+        });
+
+        // --- Logic untuk Header Scroll ---
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+            else { header.classList.remove('scrolled'); }
+        });
+        
+        // --- Logic untuk Hamburger Menu ---
+        const hamburger = document.querySelector('.hamburger-menu');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+        hamburger.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('open');
+        });
+
+        // --- Logic untuk Modal Konsultasi ---
+        const modal = document.getElementById('consultationModal');
+        const openModalButtons = document.querySelectorAll('#heroCtaButton, #waFloatButton, .btn-pilih-paket');
+        const closeModalButton = document.getElementById('modalCloseButton');
+        const consultationForm = document.getElementById('consultationForm');
+        
+        const openModal = () => { modal.style.display = 'flex'; };
+        const closeModal = () => { modal.style.display = 'none'; };
+        
+        openModalButtons.forEach(button => button.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        }));
+        
+        closeModalButton.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => { if (e.target === modal) { closeModal(); } });
+        
+        consultationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let salesWhatsappNumber = '628199846675';
+            let nama = document.getElementById('nama').value;
+            let alamat = document.getElementById('alamat').value;
+            let nohp = document.getElementById('nohp').value;
+            let messageTemplate = `Halo Sales Eksekutif Indibiz,\n\nSaya tertarik untuk pemasangan internet di lokasi usaha saya.\n\nData saya:\n- Nama: ${nama}\n- Alamat: ${alamat}\n- No. HP: ${nohp}\n\nMohon informasinya mengenai jangkauan dan paket yang tersedia. Terima kasih.`;
+            let encodedMessage = encodeURIComponent(messageTemplate.trim());
+            let whatsappUrl = `https://api.whatsapp.com/send?phone=${salesWhatsappNumber}&text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+            consultationForm.reset();
+            closeModal();
+        });
+
+        // --- Logic untuk FAQ Accordion ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.faq-item.active');
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                }
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
